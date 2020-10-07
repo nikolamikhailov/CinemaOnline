@@ -1,0 +1,87 @@
+package ru.l4gunner4l.cinemaonline
+
+import android.util.Log
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import ru.l4gunner4l.cinemaonline.base.HeaderInterceptor
+import ru.l4gunner4l.cinemaonline.movielist.data.MoviesInteractor
+import ru.l4gunner4l.cinemaonline.movielist.data.MoviesRepository
+import ru.l4gunner4l.cinemaonline.movielist.data.MoviesRepositoryImpl
+import ru.l4gunner4l.cinemaonline.movielist.data.remote.MoviesApi
+import ru.l4gunner4l.cinemaonline.movielist.data.remote.model.MoviesRemoteSource
+import ru.l4gunner4l.cinemaonline.movielist.ui.MoviesListViewModel
+import ru.terrakok.cicerone.Cicerone
+import ru.terrakok.cicerone.NavigatorHolder
+import ru.terrakok.cicerone.Router
+
+const val MOVIES_QUALIFIER = "MOVIES_QUALIFIER"
+private const val BASE_URL =
+    "https://gist.githubusercontent.com/LukyanovAnatoliy/eca5141dedc79751b3d0b339649e06a3/raw/38f9419762adf27c34a3f052733b296385b6aa8d/"
+
+val applicationModule = module {
+
+    single<Retrofit> {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(get())
+            .build()
+    }
+
+    single<OkHttpClient> {
+        OkHttpClient.Builder()
+            .addInterceptor(HeaderInterceptor())
+            .addInterceptor(HttpLoggingInterceptor(
+                object : HttpLoggingInterceptor.Logger {
+                    override fun log(message: String) {
+                        Log.d("OkHttp", message)
+                    }
+                }
+            ).apply {
+                setLevel(HttpLoggingInterceptor.Level.BODY)
+            })
+            .build()
+    }
+
+    viewModel<MoviesListViewModel> {
+        MoviesListViewModel(get())
+    }
+
+    single<MoviesApi> {
+        get<Retrofit>().create(MoviesApi::class.java)
+    }
+
+    single<MoviesRemoteSource> {
+        MoviesRemoteSource(get())
+    }
+
+    single<MoviesRepository> {
+        MoviesRepositoryImpl(get())
+    }
+
+    single<MoviesInteractor> {
+        MoviesInteractor(get())
+    }
+
+}
+
+val navModule = module {
+
+    single<Cicerone<Router>>(named(MOVIES_QUALIFIER)) {
+        Cicerone.create()
+    }
+
+    single<NavigatorHolder>(named(MOVIES_QUALIFIER)) {
+        get<Cicerone<Router>>(named(MOVIES_QUALIFIER)).navigatorHolder
+    }
+
+    single<Router>(named(MOVIES_QUALIFIER)) {
+        get<Cicerone<Router>>(named(MOVIES_QUALIFIER)).router
+    }
+
+}
