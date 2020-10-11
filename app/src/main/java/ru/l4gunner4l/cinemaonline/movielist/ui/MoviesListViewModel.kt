@@ -1,7 +1,7 @@
 package ru.l4gunner4l.cinemaonline.movielist.ui
 
 import android.util.Log
-import kotlinx.coroutines.GlobalScope
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.l4gunner4l.cinemaonline.base.BaseViewModel
 import ru.l4gunner4l.cinemaonline.base.Event
@@ -14,7 +14,7 @@ class MoviesListViewModel(private val interactor: MoviesInteractor) : BaseViewMo
     override fun reduce(event: Event, previousState: ViewState): ViewState? {
         when (event) {
             is DataEvent.RequestMovies -> {
-                GlobalScope.launch {
+                viewModelScope.launch {
                     val movies = interactor.getMovies()
                     Log.i("M_MAIN", movies.toString())
                     processDataEvent(DataEvent.SuccessMoviesRequest(movies))

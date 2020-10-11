@@ -13,11 +13,11 @@ fun RecyclerView.setAdapterAndCleanupOnDetachFromWindow(mAdapter: RecyclerView.A
     adapter = mAdapter
     addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
         override fun onViewAttachedToWindow(v: View?) {
-            adapter = null
-            removeOnAttachStateChangeListener(this)
         }
 
         override fun onViewDetachedFromWindow(v: View?) {
+            adapter = null
+            removeOnAttachStateChangeListener(this)
         }
     })
 }
