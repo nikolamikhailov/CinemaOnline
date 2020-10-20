@@ -6,6 +6,7 @@ import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import kotlinx.android.synthetic.main.item_movie.*
 import ru.l4gunner4l.cinemaonline.ListItem
 import ru.l4gunner4l.cinemaonline.R
+import ru.l4gunner4l.cinemaonline.movielist.ui.model.MovieListItem
 
 fun moviesAdapterDelegate(onClick: (Int) -> Unit): AdapterDelegate<List<ListItem>> {
     return adapterDelegateLayoutContainer<MovieListItem, ListItem>(

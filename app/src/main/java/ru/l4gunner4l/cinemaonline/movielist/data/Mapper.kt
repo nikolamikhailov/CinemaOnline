@@ -3,7 +3,7 @@ package ru.l4gunner4l.cinemaonline.movielist.data
 import ru.l4gunner4l.cinemaonline.movielist.data.remote.model.GenreRemoteModel
 import ru.l4gunner4l.cinemaonline.movielist.data.remote.model.MovieRemoteModel
 import ru.l4gunner4l.cinemaonline.movielist.ui.GenreModel
-import ru.l4gunner4l.cinemaonline.movielist.ui.MovieListItem
+import ru.l4gunner4l.cinemaonline.movielist.ui.model.MovieListItem
 
 fun MovieRemoteModel.mapToUiModel(): MovieListItem {
     return MovieListItem(

@@ -1,7 +1,7 @@
 package ru.l4gunner4l.cinemaonline.movielist.data
 
 import ru.l4gunner4l.cinemaonline.movielist.data.remote.model.MoviesRemoteSource
-import ru.l4gunner4l.cinemaonline.movielist.ui.MovieListItem
+import ru.l4gunner4l.cinemaonline.movielist.ui.model.MovieListItem
 
 class MoviesRepositoryImpl(private val remote: MoviesRemoteSource) : MoviesRepository {
 
