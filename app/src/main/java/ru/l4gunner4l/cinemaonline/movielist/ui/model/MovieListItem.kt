@@ -1,6 +1,7 @@
-package ru.l4gunner4l.cinemaonline.movielist.ui
+package ru.l4gunner4l.cinemaonline.movielist.ui.model
 
 import ru.l4gunner4l.cinemaonline.ListItem
+import ru.l4gunner4l.cinemaonline.movielist.ui.GenreModel
 
 data class MovieListItem(
     val id: Long,
@@ -9,5 +10,4 @@ data class MovieListItem(
     val overview: String,
     val image: String,
     val releaseDate: String
-) : ListItem {
-}
+) : ListItem

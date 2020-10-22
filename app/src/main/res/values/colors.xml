@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+
+    <color name="colorPrimary">#005D57</color>
+    <color name="colorPrimaryDark">#04B97F</color>
+    <color name="colorAccent">#37EFBA</color>
+
+    <color name="background_light_night">#373741</color>
+    <color name="background_medium_night">#33333D</color>
+    <color name="background_dark_night">#26282F</color>
+
+    <color name="background_light">#E3E3E3</color>
+    <color name="background_medium">#C3C3C3</color>
+    <color name="background_dark">#979797</color>
+
+    <color name="black_70">#B3000000</color>
+    <color name="black_100">#000000</color>
+    <color name="white_80">#ccffffff</color>
+    <color name="white_100">#FFFFFF</color>
+
+    <color name="dark_900">#121214</color>
+    <color name="dark_800">#192024</color>
+    <color name="dark_700">#2A3136</color>
+    <color name="dark_600">#34414A</color>
+    <color name="dark_500">#4F4E57</color>
+    <color name="dark_400">#646370</color>
+    <color name="dark_300">#807F8A</color>
+    <color name="dark_200">#878594</color>
+
+    <color name="grey_900">#828D99</color>
+    <color name="grey_800">#ACAAB2</color>
+    <color name="grey_700">#A5AEB8</color>
+    <color name="grey_600">#CBC9D1</color>
+    <color name="grey_500">#C2CED1</color>
+    <color name="grey_400">#F2F2F2</color>
+    <color name="grey_300">#F4F5F6</color>
+    <color name="grey_200">#F7F7F7</color>
+
+    <color name="text_color">@color/dark_900</color>
+    <color name="text_color_secondary">@color/dark_800</color>
+
+    <color name="text_color_night">@color/grey_300</color>
+    <color name="text_color_secondary_night">@color/grey_900</color>
+
 </resources>

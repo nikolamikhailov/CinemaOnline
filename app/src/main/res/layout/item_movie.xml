@@ -17,27 +17,32 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_item"
+        app:layout_constraintBottom_toBottomOf="@id/itemMovieImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/itemMovieTitle"
-        style="@style/ItemMovieTitleTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="16dp"
+        android:textAppearance="@style/TextAppearance.ItemMovieName"
+        app:layout_constraintBottom_toBottomOf="@id/itemMovieImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemMovieImage"
         tools:text="Spider-man" />
 
     <TextView
         android:id="@+id/itemMovieOverview"
-        style="@style/ItemMovieOverviewTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemMovieTitle"
+        android:textAppearance="@style/TextAppearance.ItemMovieDescription"
+        app:layout_constraintTop_toBottomOf="@id/itemMovieImage"
         tools:text="Bla bla bla" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
