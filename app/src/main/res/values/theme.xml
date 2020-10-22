@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar"></style>
+    <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
 
     <style name="BaseTheme.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
