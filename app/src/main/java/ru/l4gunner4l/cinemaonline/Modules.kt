@@ -15,6 +15,8 @@ import ru.l4gunner4l.cinemaonline.movielist.data.MoviesRepositoryImpl
 import ru.l4gunner4l.cinemaonline.movielist.data.remote.MoviesApi
 import ru.l4gunner4l.cinemaonline.movielist.data.remote.model.MoviesRemoteSource
 import ru.l4gunner4l.cinemaonline.movielist.ui.MoviesListViewModel
+import ru.l4gunner4l.cinemaonline.singlemovie.data.SingleMovieInteractor
+import ru.l4gunner4l.cinemaonline.singlemovie.ui.SingleMovieViewModel
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -47,9 +49,27 @@ val applicationModule = module {
             })
             .build()
     }
+}
 
+val navModule = module {
+
+    single<Cicerone<Router>>(named(MOVIES_QUALIFIER)) {
+        Cicerone.create()
+    }
+
+    single<NavigatorHolder>(named(MOVIES_QUALIFIER)) {
+        get<Cicerone<Router>>(named(MOVIES_QUALIFIER)).navigatorHolder
+    }
+
+    single<Router>(named(MOVIES_QUALIFIER)) {
+        get<Cicerone<Router>>(named(MOVIES_QUALIFIER)).router
+    }
+
+}
+
+val moviesListModule = module {
     viewModel<MoviesListViewModel> {
-        MoviesListViewModel(get())
+        MoviesListViewModel(get(), get(named(MOVIES_QUALIFIER)))
     }
 
     single<MoviesApi> {
@@ -67,21 +87,13 @@ val applicationModule = module {
     single<MoviesInteractor> {
         MoviesInteractor(get())
     }
-
 }
 
-val navModule = module {
-
-    single<Cicerone<Router>>(named(MOVIES_QUALIFIER)) {
-        Cicerone.create()
+val singleMovieModule = module {
+    viewModel<SingleMovieViewModel> { (id: Long) ->
+        SingleMovieViewModel(id, get(), get(named(MOVIES_QUALIFIER)))
     }
-
-    single<NavigatorHolder>(named(MOVIES_QUALIFIER)) {
-        get<Cicerone<Router>>(named(MOVIES_QUALIFIER)).navigatorHolder
+    single<SingleMovieInteractor> {
+        SingleMovieInteractor(get())
     }
-
-    single<Router>(named(MOVIES_QUALIFIER)) {
-        get<Cicerone<Router>>(named(MOVIES_QUALIFIER)).router
-    }
-
 }

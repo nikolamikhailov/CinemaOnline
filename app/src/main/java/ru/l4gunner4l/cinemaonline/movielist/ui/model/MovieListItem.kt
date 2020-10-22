@@ -1,7 +1,6 @@
 package ru.l4gunner4l.cinemaonline.movielist.ui.model
 
-import ru.l4gunner4l.cinemaonline.ListItem
-import ru.l4gunner4l.cinemaonline.movielist.ui.GenreModel
+import ru.l4gunner4l.cinemaonline.base.ListItem
 
 data class MovieListItem(
     val id: Long,

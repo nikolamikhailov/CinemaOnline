@@ -2,7 +2,7 @@ package ru.l4gunner4l.cinemaonline.movielist.ui
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,10 +19,11 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
         fun newInstance() = MoviesListFragment()
     }
 
+
     private val viewModel: MoviesListViewModel by viewModel()
     private val adapter = ListDelegationAdapter(
         moviesAdapterDelegate {
-            Toast.makeText(requireContext(), "$it - position", Toast.LENGTH_LONG).show()
+            viewModel.processUiEvent(UiEvent.OnItemClick(it))
         }
     )
 
@@ -41,10 +42,12 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
     private fun render(viewState: ViewState) {
         when (viewState.status) {
             STATUS.CONTENT -> {
+                pbLoading.isVisible = false
                 adapter.setData(viewState.moviesList)
                 adapter.items
             }
             STATUS.LOAD -> {
+                pbLoading.isVisible = true
             }
             STATUS.ERROR -> {
             }
