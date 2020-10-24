@@ -2,27 +2,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="BaseTheme">
-
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorSecondary">?attr/colorPrimary</item>
         <item name="colorOnPrimary">@android:color/white</item>
-
         <!--  region Backgrounds  -->
         <item name="colorSurfaceMain">@color/dark_700</item>
         <item name="colorSurfaceAccent">@color/dark_600</item>
         <item name="colorSurfaceNative">@color/dark_700</item>
         <item name="colorSurfaceVariant">@color/dark_600</item>
-
-        <item name="colorBackground">@color/background_light_night</item>
-        <item name="android:textColor">@color/text_color_night</item>
-        <item name="android:textColorSecondary">@color/text_color_secondary_night</item>
-
-
         <!--тени-->
         <item name="elevationOverlayEnabled">false</item>
-
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:statusBarColor">?attr/colorBackground</item>
+
+
+        <item name="colorBackground">@color/background_light_night</item>
+
+        <item name="textColorPrimary">@color/text_color_night</item>
+        <item name="textColorSecondary">@color/text_color_secondary_night</item>
     </style>
 
 </resources>

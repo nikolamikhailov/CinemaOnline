@@ -7,16 +7,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorSecondary">?attr/colorPrimary</item>
         <item name="colorOnPrimary">@android:color/white</item>
-
+        <!--  region Backgrounds  -->
         <item name="colorSurfaceMain">@color/white_80</item>
         <item name="colorSurfaceAccent">@color/grey_200</item>
         <item name="colorSurfaceNative">@color/grey_400</item>
         <item name="colorSurfaceVariant">@color/white_80</item>
-
-        <!--  Assign system colorBackground to set default background for the dialogs, bottom sheets  -->
-        <item name="android:colorBackground">@color/white_80</item>
-        <item name="colorBackground">?android:colorBackground</item>
-
+        <!--  Assign system colorSurface to set default background for components, such as cards, sheets, and menus.  -->
+        <item name="colorSurface">?attr/colorSurfaceMain</item>
         <item name="colorOnSurfaceFirstPriority">@color/dark_900</item>
         <item name="colorOnSurfaceHighEmphasis">@color/dark_500</item>
         <item name="colorOnSurfaceMediumEmphasis">@color/dark_300</item>
@@ -24,15 +21,14 @@
         <item name="colorOnSurfaceOutline">@color/grey_400</item>
         <item name="colorOnSurfaceAccent">@color/dark_900</item>
 
-        <!--  Assign system colorSurface to set default background for components, such as cards, sheets, and menus.  -->
-        <item name="colorSurface">?attr/colorSurfaceMain</item>
-
-        <item name="colorBackground">@color/background_light</item>
-        <item name="android:textColor">@color/text_color</item>
-        <item name="android:textColorSecondary">@color/text_color_secondary</item>
 
         <item name="textAppearanceBody2">@style/TextAppearance.Body2</item>
         <item name="textAppearanceBody1">@style/TextAppearance.Body1</item>
+
+        <item name="colorBackground">@color/background_light</item>
+
+        <item name="textColorPrimary">@color/text_color</item>
+        <item name="textColorSecondary">@color/text_color_secondary</item>
     </style>
 
 </resources>

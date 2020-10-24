@@ -1,10 +1,9 @@
 package ru.l4gunner4l.cinemaonline.movielist.data
 
-import ru.l4gunner4l.cinemaonline.movielist.ui.model.MovieListItem
-import ru.l4gunner4l.cinemaonline.singlemovie.ui.model.SingleMovieItem
+import ru.l4gunner4l.cinemaonline.data.remote.model.MovieModel
 
 interface MoviesRepository {
 
-    suspend fun getMovies(): List<MovieListItem>
-    suspend fun getMovie(id: Long): SingleMovieItem
+    suspend fun getMovies(): List<MovieModel>
+    suspend fun getMovie(id: Long): MovieModel
 }

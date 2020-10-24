@@ -20,7 +20,7 @@ class MoviesListViewModel(
         when (event) {
             is UiEvent.OnItemClick -> {
                 viewModelScope.launch {
-                    router.navigateTo(SingleMovieScreen(interactor.getMovies()[event.index].id))
+                    router.navigateTo(SingleMovieScreen(interactor.getMovies()[event.index]))
                 }
             }
             is DataEvent.RequestMovies -> {

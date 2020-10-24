@@ -10,7 +10,13 @@ class App : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@App)
-            modules(applicationModule, navModule, moviesListModule, singleMovieModule)
+            modules(
+                applicationModule,
+                navModule,
+                moviesListModule,
+                singleMovieModule,
+                playerModule
+            )
         }
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
     }

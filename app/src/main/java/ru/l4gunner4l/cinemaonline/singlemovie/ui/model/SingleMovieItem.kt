@@ -1,6 +1,6 @@
 package ru.l4gunner4l.cinemaonline.singlemovie.ui.model
 
-import ru.l4gunner4l.cinemaonline.movielist.data.remote.model.GenreRemoteModel
+import ru.l4gunner4l.cinemaonline.data.remote.model.GenreRemoteModel
 
 data class SingleMovieItem(
     val isAdult: Boolean,

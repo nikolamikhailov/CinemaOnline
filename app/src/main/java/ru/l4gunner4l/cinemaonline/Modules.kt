@@ -9,13 +9,14 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.l4gunner4l.cinemaonline.base.HeaderInterceptor
+import ru.l4gunner4l.cinemaonline.data.remote.MoviesApi
+import ru.l4gunner4l.cinemaonline.data.remote.model.MovieModel
+import ru.l4gunner4l.cinemaonline.data.remote.model.MoviesRemoteSource
 import ru.l4gunner4l.cinemaonline.movielist.data.MoviesInteractor
 import ru.l4gunner4l.cinemaonline.movielist.data.MoviesRepository
 import ru.l4gunner4l.cinemaonline.movielist.data.MoviesRepositoryImpl
-import ru.l4gunner4l.cinemaonline.movielist.data.remote.MoviesApi
-import ru.l4gunner4l.cinemaonline.movielist.data.remote.model.MoviesRemoteSource
 import ru.l4gunner4l.cinemaonline.movielist.ui.MoviesListViewModel
-import ru.l4gunner4l.cinemaonline.singlemovie.data.SingleMovieInteractor
+import ru.l4gunner4l.cinemaonline.player.ui.PlayerViewModel
 import ru.l4gunner4l.cinemaonline.singlemovie.ui.SingleMovieViewModel
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.NavigatorHolder
@@ -90,10 +91,13 @@ val moviesListModule = module {
 }
 
 val singleMovieModule = module {
-    viewModel<SingleMovieViewModel> { (id: Long) ->
-        SingleMovieViewModel(id, get(), get(named(MOVIES_QUALIFIER)))
+    viewModel<SingleMovieViewModel> { (movie: MovieModel) ->
+        SingleMovieViewModel(movie, get(named(MOVIES_QUALIFIER)))
     }
-    single<SingleMovieInteractor> {
-        SingleMovieInteractor(get())
+}
+
+val playerModule = module {
+    viewModel<PlayerViewModel> { (movie: MovieModel) ->
+        PlayerViewModel(movie, get(named(MOVIES_QUALIFIER)))
     }
 }

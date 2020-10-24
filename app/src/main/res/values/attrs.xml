@@ -17,11 +17,12 @@
         <attr name="colorOnSurfaceMediumEmphasis" format="color" />
         <attr name="colorOnSurfaceDisabled" format="color" />
         <attr name="colorOnSurfaceOutline" format="color" />
-        <attr name="colorOnSurfaceAccent" format="color" />
-
         <attr name="colorOnSurfacePrimary" format="color" />
+        <attr name="colorOnSurfaceAccent" format="color" />
         <attr name="colorOnSurfaceError" format="color" />
-        <attr name="android:textColor" format="color" />
-        <attr name="android:textColorSecondary" format="color" />
+
+
+        <attr name="textColorPrimary" format="color" />
+        <attr name="textColorSecondary" format="color" />
     </declare-styleable>
 </resources>

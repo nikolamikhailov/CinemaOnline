@@ -1,8 +1,12 @@
-package ru.l4gunner4l.cinemaonline.movielist.data.remote.model
+package ru.l4gunner4l.cinemaonline.data.remote.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+import ru.l4gunner4l.cinemaonline.base.ListItem
 
-data class MovieRemoteModel(
+@Parcelize
+data class MovieModel(
     @SerializedName("adult")
     val isAdult: Boolean,
     @SerializedName("genres")
@@ -29,4 +33,4 @@ data class MovieRemoteModel(
     val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Int
-)
+) : Parcelable, ListItem
