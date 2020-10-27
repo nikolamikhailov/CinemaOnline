@@ -32,6 +32,12 @@
                 app:layout_collapseMode="parallax"
                 tools:src="@mipmap/ic_launcher" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="50"
+                android:background="@drawable/bg_item" />
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"

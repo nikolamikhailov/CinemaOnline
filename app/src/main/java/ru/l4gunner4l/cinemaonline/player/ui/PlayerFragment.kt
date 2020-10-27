@@ -3,9 +3,12 @@ package ru.l4gunner4l.cinemaonline.player.ui
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_player.*
+import kotlinx.android.synthetic.main.item_error.*
+import kotlinx.android.synthetic.main.item_progress_bar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import ru.l4gunner4l.cinemaonline.R
@@ -28,23 +31,37 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.viewState.observe(viewLifecycleOwner, Observer(::render))
+        progress.isVisible = true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.processDataEvent(DataEvent.Play)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.processDataEvent(DataEvent.Pause)
     }
 
     private fun render(viewState: ViewState) {
         when (viewState.status) {
+            STATUS.LOAD -> {
+                playerView.player = viewState.player
+                progress.isVisible = false
+            }
             STATUS.CONTENT -> {
                 setMovieToUi(viewState.movie)
             }
-            STATUS.LOAD -> {
-
-            }
             STATUS.ERROR -> {
-
+                error.isVisible = true
+                errorText.text = "Error"
             }
         }
     }
 
     private fun setMovieToUi(movie: MovieModel) {
-        linkVideo.text = movie.video
+
     }
+
 }

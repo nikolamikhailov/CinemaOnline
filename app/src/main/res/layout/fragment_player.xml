@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.google.android.exoplayer2.ui.PlayerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/playerView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".player.ui.PlayerFragment">
+    android:background="@color/black_100"
+    android:keepScreenOn="true">
 
-    <TextView
-        android:id="@+id/linkVideo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="" />
+    <include layout="@layout/item_progress_bar" />
 
-</FrameLayout>
+    <include layout="@layout/item_error" />
+
+</com.google.android.exoplayer2.ui.PlayerView>

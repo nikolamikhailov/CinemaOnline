@@ -52,9 +52,10 @@ dependencies {
     def cicerone = "5.1.1"
     def lifecycle_version = "2.2.0"
     def logging = "4.8.1"
-    def material = "1.2.0"
+    def material = "1.2.1"
     def arch_version = "2.1.0"
     def adapter_delegates = "4.3.0"
+    def exoplayer = "2.12.1"
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -65,9 +66,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-beta01"
@@ -75,7 +76,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-service:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
     testImplementation "androidx.arch.core:core-testing:$arch_version"
 
     implementation "com.squareup.okhttp3:logging-interceptor:$logging"
@@ -89,12 +90,13 @@ dependencies {
     implementation "ru.terrakok.cicerone:cicerone:$cicerone"
 
     implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-core-ext:$koin_version"
-    testImplementation "org.koin:koin-test:$koin_version"
     implementation "org.koin:koin-androidx-scope:$koin_version"
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
     implementation "org.koin:koin-androidx-fragment:$koin_version"
     implementation "org.koin:koin-androidx-ext:$koin_version"
+    testImplementation "org.koin:koin-test:$koin_version"
 
     implementation "com.google.android.material:material:$material"
 
@@ -104,4 +106,9 @@ dependencies {
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:$adapter_delegates"
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:$adapter_delegates"
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$adapter_delegates"
+
+    implementation "com.google.android.exoplayer:exoplayer:$exoplayer"
+    implementation "com.google.android.exoplayer:exoplayer-core:$exoplayer"
+    implementation "com.google.android.exoplayer:exoplayer-dash:$exoplayer"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$exoplayer"
 }
