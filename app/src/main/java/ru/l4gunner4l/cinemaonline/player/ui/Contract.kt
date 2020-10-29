@@ -17,12 +17,13 @@ sealed class DataEvent : Event {
     object Play : DataEvent()
     object Pause : DataEvent()
 }
-
 sealed class UiEvent : Event {
     object OnExitClick : UiEvent()
 }
 
 enum class STATUS {
+    PLAY,
+    PAUSE,
     LOAD,
     CONTENT,
     ERROR

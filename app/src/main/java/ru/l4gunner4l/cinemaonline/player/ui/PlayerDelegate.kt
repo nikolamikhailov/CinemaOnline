@@ -2,8 +2,9 @@ package ru.l4gunner4l.cinemaonline.player.ui
 
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
+import org.koin.core.KoinComponent
 
-interface PlayerDelegate {
+interface PlayerDelegate : KoinComponent {
 
     fun play()
 

@@ -35,7 +35,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:alpha="50"
+                android:alpha="0.9"
                 android:background="@drawable/bg_item" />
 
             <androidx.appcompat.widget.Toolbar

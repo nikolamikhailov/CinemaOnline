@@ -3,6 +3,7 @@ package ru.l4gunner4l.cinemaonline
 import android.util.Log
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.DefaultRenderersFactory
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
@@ -109,20 +110,20 @@ val singleMovieModule = module {
 
 val playerModule = module {
 
-    single(named(USER_AGENT)) {
+    single<String>(named(USER_AGENT)) {
         Util.getUserAgent(
             get(),
             androidContext().getString(R.string.app_name)
         )
     }
 
-    factory {
+    factory<ExoPlayer> {
         ExoPlayerFactory.newSimpleInstance(
             androidContext(),
             DefaultRenderersFactory(androidContext()),
             DefaultTrackSelector(),
             DefaultLoadControl()
-        )
+        ) as ExoPlayer
     }
 
     single<DefaultDataSourceFactory> {
