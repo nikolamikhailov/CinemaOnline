@@ -2,13 +2,14 @@ package ru.l4gunner4l.cinemaonline.movielist.ui
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import kotlinx.android.synthetic.main.fragment_movies_list.*
+import kotlinx.android.synthetic.main.item_error.*
+import kotlinx.android.synthetic.main.item_error.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.l4gunner4l.cinemaonline.R
 import ru.l4gunner4l.cinemaonline.setAdapterAndCleanupOnDetachFromWindow
@@ -41,7 +42,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.processUiEvent(DataEvent.RefreshMovies)
         }
-        errorText.setOnClickListener {
+        errorItem.errorReload.setOnClickListener {
             viewModel.processDataEvent(DataEvent.RequestMovies)
         }
     }
@@ -52,8 +53,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
                 pbLoading.isVisible = true
             }
             STATUS.ERROR -> {
-                Toast.makeText(requireContext(), "No Internet", Toast.LENGTH_LONG).show()
-                errorText.text = "No Internet"
+                errorItem.errorText.text = "No Internet"
                 errorItem.isVisible = true
                 pbLoading.isVisible = false
             }

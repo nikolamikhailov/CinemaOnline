@@ -4,34 +4,29 @@
     android:id="@+id/errorItem"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/backgroundColor"
     android:visibility="gone">
 
-    <TextView
-        android:id="@+id/errorText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        tools:text="error" />
-    <!--<LinearLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/errorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="error"
-            android:textAppearance="@style/TextAppearance.Error"/>
+            android:textAppearance="@style/TextAppearance.Error" />
+
         <Button
             android:id="@+id/errorReload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_reload"
-            android:textColor="?attr/colorOnPrimary"/>
-    </LinearLayout>-->
+            android:textColor="?attr/colorOnPrimary" />
+    </LinearLayout>
 
 
 </FrameLayout>

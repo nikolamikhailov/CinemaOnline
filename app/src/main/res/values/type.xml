@@ -24,6 +24,7 @@
 
     <style name="TextAppearance.Error" parent="TextAppearance.Body1">
         <item name="android:textColor">?attr/textColorError</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="TextAppearance.ItemMovieName" parent="TextAppearance.Body1">
