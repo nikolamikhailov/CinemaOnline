@@ -22,4 +22,35 @@
     </style>
 
 
+    <style name="TextAppearance.Error" parent="TextAppearance.Body1">
+        <item name="android:textColor">?attr/textColorError</item>
+    </style>
+
+    <style name="TextAppearance.ItemMovieName" parent="TextAppearance.Body1">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TextAppearance.ItemMovieDescription" parent="TextAppearance.Body2">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+    <style name="TextAppearance.CollapsingToolbar" parent="TextAppearance.Body1">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TextAppearance.Overview" parent="TextAppearance.Body2">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.Genre" parent="TextAppearance.Body2">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+
 </resources>

@@ -1,11 +1,8 @@
 package ru.l4gunner4l.cinemaonline
 
 import android.util.Log
-import com.google.android.exoplayer2.DefaultLoadControl
-import com.google.android.exoplayer2.DefaultRenderersFactory
 import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.ExoPlayerFactory
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
+import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 import okhttp3.OkHttpClient
@@ -49,7 +46,7 @@ val applicationModule = module {
 
     single<OkHttpClient> {
         OkHttpClient.Builder()
-            .addInterceptor(HeaderInterceptor())
+            .addInterceptor(HeaderInterceptor(androidContext()))
             .addInterceptor(HttpLoggingInterceptor(
                 object : HttpLoggingInterceptor.Logger {
                     override fun log(message: String) {
@@ -118,16 +115,22 @@ val playerModule = module {
     }
 
     factory<ExoPlayer> {
-        ExoPlayerFactory.newSimpleInstance(
+        SimpleExoPlayer.Builder(
+            androidContext()
+        ).build()
+        /*ExoPlayerFactory.newSimpleInstance(
             androidContext(),
             DefaultRenderersFactory(androidContext()),
             DefaultTrackSelector(),
             DefaultLoadControl()
-        ) as ExoPlayer
+        ) as ExoPlayer*/
     }
 
     single<DefaultDataSourceFactory> {
-        DefaultDataSourceFactory(get(), get<String>(named(USER_AGENT)))
+        DefaultDataSourceFactory(
+            get(),
+            get<String>(named(USER_AGENT))
+        )
     }
 
     factory<PlayerDelegate> {

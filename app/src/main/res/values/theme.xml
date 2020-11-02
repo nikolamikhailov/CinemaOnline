@@ -6,7 +6,7 @@
     <style name="BaseTheme.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorSecondary">?attr/colorPrimary</item>
-        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorOnPrimary">@color/grey_200</item>
         <!--  region Backgrounds  -->
         <item name="colorSurfaceMain">@color/white_80</item>
         <item name="colorSurfaceAccent">@color/grey_200</item>
@@ -29,6 +29,7 @@
 
         <item name="textColorPrimary">@color/text_color</item>
         <item name="textColorSecondary">@color/text_color_secondary</item>
+        <item name="textColorError">@color/colorError</item>
     </style>
 
 </resources>

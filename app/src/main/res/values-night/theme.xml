@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="BaseTheme">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorSecondary">?attr/colorPrimary</item>
-        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorOnPrimary">@color/grey_200</item>
         <!--  region Backgrounds  -->
         <item name="colorSurfaceMain">@color/dark_700</item>
         <item name="colorSurfaceAccent">@color/dark_600</item>
@@ -20,6 +20,7 @@
 
         <item name="textColorPrimary">@color/text_color_night</item>
         <item name="textColorSecondary">@color/text_color_secondary_night</item>
+        <item name="textColorError">@color/colorError</item>
     </style>
 
 </resources>

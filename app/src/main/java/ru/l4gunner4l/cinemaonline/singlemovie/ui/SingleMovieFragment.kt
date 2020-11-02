@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_single_movie.*
+import kotlinx.android.synthetic.main.rating.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import ru.l4gunner4l.cinemaonline.R
@@ -33,9 +34,11 @@ class SingleMovieFragment : Fragment(R.layout.fragment_single_movie) {
     }
 
     private fun initUi() {
+        val movie = requireArguments().getParcelable<MovieModel>(KEY_MOVIE)!!
         openPlayerBtn.setOnClickListener {
             viewModel.processUiEvent(UiEvent.OnWatchClick)
         }
+        genres.adapter = GenresAdapter(movie.genres)
     }
 
     private fun render(viewState: ViewState) {
@@ -53,6 +56,7 @@ class SingleMovieFragment : Fragment(R.layout.fragment_single_movie) {
     }
 
     private fun setMovieToUi(movie: MovieModel) = with(movie) {
+        ratingTV.text = voteAverage.toString()
         toolbar.title = title
         descriptionTV.text = overview
         Glide.with(requireContext())

@@ -2,6 +2,7 @@ package ru.l4gunner4l.cinemaonline.movielist.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -37,19 +38,36 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
     private fun initView() {
         rvMoviesList.layoutManager = LinearLayoutManager(requireContext())
         rvMoviesList.setAdapterAndCleanupOnDetachFromWindow(adapter)
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.processUiEvent(DataEvent.RefreshMovies)
+        }
+        errorText.setOnClickListener {
+            viewModel.processDataEvent(DataEvent.RequestMovies)
+        }
     }
 
     private fun render(viewState: ViewState) {
         when (viewState.status) {
-            STATUS.CONTENT -> {
-                pbLoading.isVisible = false
-                adapter.setData(viewState.moviesList)
-                adapter.items
-            }
             STATUS.LOAD -> {
                 pbLoading.isVisible = true
             }
             STATUS.ERROR -> {
+                Toast.makeText(requireContext(), "No Internet", Toast.LENGTH_LONG).show()
+                errorText.text = "No Internet"
+                errorItem.isVisible = true
+                pbLoading.isVisible = false
+            }
+            STATUS.CONTENT -> {
+                errorItem.isVisible = false
+                pbLoading.isVisible = false
+                adapter.setData(viewState.moviesList)
+            }
+            STATUS.ON_REFRESH -> {
+                swipeRefreshLayout.isRefreshing = true
+            }
+            STATUS.REFRESHED -> {
+                adapter.setData(viewState.moviesList)
+                swipeRefreshLayout.isRefreshing = false
             }
         }
     }

@@ -4,6 +4,8 @@
 
         <attr name="colorPromoted" format="color" />
         <attr name="colorAccented" format="color" />
+        <attr name="colorOnPrimary" format="color" />
+        <attr name="titleTextColor" format="color" />
 
         <attr name="colorBackground" format="color" />
 
@@ -24,5 +26,6 @@
 
         <attr name="textColorPrimary" format="color" />
         <attr name="textColorSecondary" format="color" />
+        <attr name="textColorError" format="color" />
     </declare-styleable>
 </resources>

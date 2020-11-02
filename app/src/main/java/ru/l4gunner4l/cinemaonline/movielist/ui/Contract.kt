@@ -15,10 +15,16 @@ sealed class UiEvent : Event {
 sealed class DataEvent : Event {
     object RequestMovies : DataEvent()
     data class SuccessMoviesRequest(val movies: List<MovieModel>) : DataEvent()
+    object RefreshMovies : DataEvent()
+    data class MoviesRefreshed(val movies: List<MovieModel>) : DataEvent()
+
+    object FailureMoviesRequest : DataEvent()
 }
 
 enum class STATUS {
     LOAD,
     CONTENT,
+    ON_REFRESH,
+    REFRESHED,
     ERROR
 }

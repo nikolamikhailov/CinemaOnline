@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_player.*
 import kotlinx.android.synthetic.main.item_error.*
+import kotlinx.android.synthetic.main.item_error.view.*
 import kotlinx.android.synthetic.main.item_progress_bar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -54,8 +55,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
                 setMovieToUi(viewState.movie)
             }
             STATUS.ERROR -> {
-                error.isVisible = true
-                errorText.text = "Error"
+                errorItem.isVisible = true
+                errorItem.errorText.text = "Error"
             }
         }
     }

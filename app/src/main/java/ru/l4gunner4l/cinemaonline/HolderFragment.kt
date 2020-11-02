@@ -22,7 +22,7 @@ class HolderFragment : Fragment(R.layout.fragment_holder) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        router.navigateTo(MoviesScreen())
+        if (savedInstanceState == null) router.navigateTo(MoviesScreen())
     }
 
     override fun onResume() {

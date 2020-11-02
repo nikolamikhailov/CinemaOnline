@@ -55,7 +55,7 @@ dependencies {
     def material = "1.2.1"
     def arch_version = "2.1.0"
     def adapter_delegates = "4.3.0"
-    def exoplayer = "2.9.5"
+    def exoplayer = "2.12.1"
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
