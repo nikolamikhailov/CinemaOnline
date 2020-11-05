@@ -2,11 +2,12 @@ package ru.l4gunner4l.cinemaonline.movielist.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 import kotlinx.android.synthetic.main.item_error.*
@@ -39,6 +40,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
 
     private fun initView() {
         rvMoviesList.layoutManager = LinearLayoutManager(requireContext())
+        rvMoviesList.addItemDecoration(DividerItemDecoration(activity, RecyclerView.VERTICAL))
         rvMoviesList.setAdapterAndCleanupOnDetachFromWindow(adapter)
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.processUiEvent(DataEvent.RefreshMovies)
@@ -46,7 +48,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
         errorItem.errorReload.setOnClickListener {
             viewModel.processDataEvent(DataEvent.RequestMovies)
         }
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        /*searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
             }
@@ -55,7 +57,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
                 return false
             }
 
-        })
+        })*/
     }
 
     private fun render(viewState: ViewState) {

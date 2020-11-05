@@ -20,6 +20,9 @@ class SingleMovieViewModel(
             is UiEvent.OnWatchClick -> {
                 router.navigateTo(PlayerScreen(movie))
             }
+            is UiEvent.OnBackClick -> {
+                router.exit()
+            }
         }
         return null
     }

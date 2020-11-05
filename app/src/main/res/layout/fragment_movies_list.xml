@@ -10,13 +10,13 @@
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMoviesList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:itemCount="0"
+            android:clipToPadding="false"
+            android:paddingTop="64dp"
+            tools:itemCount="10"
             tools:listitem="@layout/item_movie" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -27,7 +27,10 @@
         android:layout_margin="8dp"
         android:background="@drawable/bg_search_view"
         android:textColorHint="?attr/textColorPrimary"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:queryBackground="@android:color/transparent"
+        app:iconifiedByDefault="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="@string/search_view_hint" />
 
     <include
         layout="@layout/item_error"

@@ -13,7 +13,7 @@ data class ViewState(
 
 sealed class DataEvent : Event {
     object Load : DataEvent()
-    data class Error(val textError: String) : DataEvent()
+    data class Error(val error: Exception) : DataEvent()
     object Play : DataEvent()
     object Pause : DataEvent()
 }

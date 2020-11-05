@@ -26,13 +26,13 @@ class PlayerViewModel(
                 player.setStateListener(object : Player.EventListener {
                     override fun onLoadingChanged(isLoading: Boolean) {}
                     override fun onPlayerError(error: ExoPlaybackException) {
-                        processDataEvent(DataEvent.Error(error.localizedMessage!!))
+                        processDataEvent(DataEvent.Error(error))
                     }
                 })
                 return previousState.copy(status = STATUS.CONTENT, player = player.getPlayerImpl())
             }
             is DataEvent.Error -> {
-                Log.i("M_MAIN", "Error = ${event.textError}")
+                Log.i("M_MAIN", "Error = ${event.error.localizedMessage}")
                 return previousState.copy(status = STATUS.ERROR)
             }
             DataEvent.Play -> {

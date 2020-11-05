@@ -6,6 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_single_movie.*
 import kotlinx.android.synthetic.main.rating.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -38,7 +39,18 @@ class SingleMovieFragment : Fragment(R.layout.fragment_single_movie) {
         openPlayerBtn.setOnClickListener {
             viewModel.processUiEvent(UiEvent.OnWatchClick)
         }
-        genres.adapter = GenresAdapter(movie.genres)
+        movie.genres.forEach { genre ->
+            genres.addView(
+                Chip(requireContext()).apply {
+                    text = genre.name.toLowerCase()
+                    setChipBackgroundColorResource(R.color.colorPrimary)
+                    setTextAppearanceResource(R.style.TextAppearance_Genre)
+                }
+            )
+        }
+        btnBack.setOnClickListener {
+            viewModel.processUiEvent(UiEvent.OnBackClick)
+        }
     }
 
     private fun render(viewState: ViewState) {
@@ -47,10 +59,8 @@ class SingleMovieFragment : Fragment(R.layout.fragment_single_movie) {
                 setMovieToUi(viewState.movie)
             }
             STATUS.LOAD -> {
-
             }
             STATUS.ERROR -> {
-
             }
         }
     }
