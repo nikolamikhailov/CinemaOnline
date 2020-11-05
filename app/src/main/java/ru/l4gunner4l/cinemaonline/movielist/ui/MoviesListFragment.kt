@@ -2,6 +2,7 @@ package ru.l4gunner4l.cinemaonline.movielist.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -10,6 +11,7 @@ import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 import kotlinx.android.synthetic.main.item_error.*
 import kotlinx.android.synthetic.main.item_error.view.*
+import kotlinx.android.synthetic.main.item_progress_bar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.l4gunner4l.cinemaonline.R
 import ru.l4gunner4l.cinemaonline.setAdapterAndCleanupOnDetachFromWindow
@@ -20,7 +22,6 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
     companion object {
         fun newInstance() = MoviesListFragment()
     }
-
 
     private val viewModel: MoviesListViewModel by viewModel()
     private val adapter = ListDelegationAdapter(
@@ -45,21 +46,31 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
         errorItem.errorReload.setOnClickListener {
             viewModel.processDataEvent(DataEvent.RequestMovies)
         }
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
     }
 
     private fun render(viewState: ViewState) {
         when (viewState.status) {
             STATUS.LOAD -> {
-                pbLoading.isVisible = true
+                progress.isVisible = true
             }
             STATUS.ERROR -> {
                 errorItem.errorText.text = "No Internet"
                 errorItem.isVisible = true
-                pbLoading.isVisible = false
+                progress.isVisible = false
             }
             STATUS.CONTENT -> {
                 errorItem.isVisible = false
-                pbLoading.isVisible = false
+                progress.isVisible = false
                 adapter.setData(viewState.moviesList)
             }
             STATUS.ON_REFRESH -> {

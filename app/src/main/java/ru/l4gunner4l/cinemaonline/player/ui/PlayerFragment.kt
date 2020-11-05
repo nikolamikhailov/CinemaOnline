@@ -32,7 +32,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.viewState.observe(viewLifecycleOwner, Observer(::render))
-        progress.isVisible = true
+        viewModel.processDataEvent(DataEvent.Load)
+        errorItem.errorReload.setOnClickListener {
+            viewModel.processDataEvent(DataEvent.Load)
+        }
     }
 
     override fun onResume() {
@@ -48,21 +51,18 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
     private fun render(viewState: ViewState) {
         when (viewState.status) {
             STATUS.LOAD -> {
-                playerView.player = viewState.player
-                progress.isVisible = false
+                progress.isVisible = true
             }
             STATUS.CONTENT -> {
-                setMovieToUi(viewState.movie)
+                progress.isVisible = false
+                errorItem.isVisible = false
+                playerView.player = viewState.player
             }
             STATUS.ERROR -> {
                 errorItem.isVisible = true
                 errorItem.errorText.text = "Error"
             }
         }
-    }
-
-    private fun setMovieToUi(movie: MovieModel) {
-
     }
 
 }
