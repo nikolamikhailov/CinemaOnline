@@ -12,15 +12,6 @@ import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
 class HolderFragment : Fragment(R.layout.fragment_holder) {
 
-    // UI
-    // TODO fix holder
-    // TODO divider
-    // TODO player play at first start
-    // TODO save state of player
-
-    // test
-    // TODO ui test
-    // TODO espresso test recorder
     companion object {
         fun newInstance() = HolderFragment()
     }
