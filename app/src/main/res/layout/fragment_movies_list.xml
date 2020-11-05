@@ -20,25 +20,23 @@
             tools:listitem="@layout/item_movie" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <include
-        layout="@layout/item_error"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="8dp"
+        android:background="@drawable/bg_search_view"
+        android:textColorHint="?attr/textColorPrimary"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ProgressBar
-        android:id="@+id/pbLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+    <include
+        layout="@layout/item_error"
         tools:visibility="gone" />
+
+    <include
+        layout="@layout/item_progress_bar"
+        tools:visibility="gone" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

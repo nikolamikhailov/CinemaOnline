@@ -8,6 +8,7 @@
         <attr name="titleTextColor" format="color" />
 
         <attr name="colorBackground" format="color" />
+        <attr name="colorBackgroundDark" format="color" />
 
         <attr name="colorSurfaceMain" format="color|reference" />
         <attr name="colorSurfaceNative" format="color|reference" />

@@ -2,9 +2,8 @@ package ru.l4gunner4l.cinemaonline.player.ui
 
 import android.net.Uri
 import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import org.koin.core.KoinComponent
 
@@ -24,14 +23,14 @@ class PlayerDelegateImpl(
     }
 
     override fun preparePlayer(url: String) {
-        val m = ProgressiveMediaSource
+        /*val m = ProgressiveMediaSource
             .Factory(dataSourceFactory)
             .createMediaSource(MediaItem.fromUri(Uri.parse(url)))
-        player.setMediaSource(m)
-        /*val mediaSource = ExtractorMediaSource
+        player.setMediaSource(m)*/
+        val mediaSource = ExtractorMediaSource
             .Factory(dataSourceFactory)
             .createMediaSource(Uri.parse(url))
-        player.prepare(mediaSource)*/
+        player.prepare(mediaSource)
     }
 
     override fun getPlayerImpl(): ExoPlayer = player

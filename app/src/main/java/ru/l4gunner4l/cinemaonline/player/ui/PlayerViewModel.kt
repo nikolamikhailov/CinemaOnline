@@ -11,33 +11,29 @@ import ru.l4gunner4l.cinemaonline.data.remote.model.MovieModel
 
 class PlayerViewModel(
     private val movie: MovieModel
-    //private val router: Router,
-
 ) : BaseViewModel<ViewState>(), KoinComponent {
 
     private val player: PlayerDelegate by inject<PlayerDelegate>()
 
     override fun initialViewState(): ViewState {
-        player.preparePlayer(movie.video)
-        player.setStateListener(object : Player.EventListener {
-            override fun onLoadingChanged(isLoading: Boolean) {
-                processDataEvent(DataEvent.Loading(isLoading))
-            }
-
-            override fun onPlayerError(error: ExoPlaybackException) {
-                processDataEvent(DataEvent.Error(error.localizedMessage!!))
-            }
-        })
         return ViewState(STATUS.LOAD, movie, player.getPlayerImpl())
     }
 
     override fun reduce(event: Event, previousState: ViewState): ViewState? {
         when (event) {
-            is DataEvent.Loading -> {
-                Log.i("M_MAIN", "Loading = ${event.isLoading}")
+            is DataEvent.Load -> {
+                player.preparePlayer(movie.video)
+                player.setStateListener(object : Player.EventListener {
+                    override fun onLoadingChanged(isLoading: Boolean) {}
+                    override fun onPlayerError(error: ExoPlaybackException) {
+                        processDataEvent(DataEvent.Error(error.localizedMessage!!))
+                    }
+                })
+                return previousState.copy(status = STATUS.CONTENT, player = player.getPlayerImpl())
             }
             is DataEvent.Error -> {
                 Log.i("M_MAIN", "Error = ${event.textError}")
+                return previousState.copy(status = STATUS.ERROR)
             }
             DataEvent.Play -> {
                 if (player.getState() == Player.STATE_ENDED) {

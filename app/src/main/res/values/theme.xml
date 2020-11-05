@@ -26,6 +26,7 @@
         <item name="textAppearanceBody1">@style/TextAppearance.Body1</item>
 
         <item name="colorBackground">@color/background_light</item>
+        <item name="colorBackgroundDark">@color/background_dark</item>
 
         <item name="textColorPrimary">@color/text_color</item>
         <item name="textColorSecondary">@color/text_color_secondary</item>

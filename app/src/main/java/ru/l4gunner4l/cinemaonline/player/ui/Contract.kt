@@ -12,7 +12,7 @@ data class ViewState(
 )
 
 sealed class DataEvent : Event {
-    data class Loading(val isLoading: Boolean) : DataEvent()
+    object Load : DataEvent()
     data class Error(val textError: String) : DataEvent()
     object Play : DataEvent()
     object Pause : DataEvent()
