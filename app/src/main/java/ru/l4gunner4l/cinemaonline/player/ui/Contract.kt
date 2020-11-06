@@ -22,8 +22,6 @@ sealed class UiEvent : Event {
 }
 
 enum class STATUS {
-    PLAY,
-    PAUSE,
     LOAD,
     CONTENT,
     ERROR

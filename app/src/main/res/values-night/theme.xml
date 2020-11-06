@@ -22,6 +22,7 @@
         <item name="textColorPrimary">@color/text_color_night</item>
         <item name="textColorSecondary">@color/text_color_secondary_night</item>
         <item name="textColorError">@color/colorError</item>
+        <item name="colorDivider">@color/color_divider_night</item>
     </style>
 
 </resources>

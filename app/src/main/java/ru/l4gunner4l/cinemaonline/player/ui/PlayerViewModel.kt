@@ -39,7 +39,7 @@ class PlayerViewModel(
                 if (player.getState() == Player.STATE_ENDED) {
                     player.seekTo(0)
                 }
-                player.pause()
+                player.play()
                 return previousState
             }
             DataEvent.Pause -> {
