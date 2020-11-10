@@ -18,6 +18,8 @@ interface PlayerDelegate : KoinComponent {
 
     fun seekTo(position: Long)
 
+    fun getPosition(): Long
+
     fun getState(): Int
 
     fun setStateListener(listener: Player.EventListener)

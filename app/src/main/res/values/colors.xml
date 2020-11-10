@@ -45,4 +45,6 @@
     <color name="text_color_secondary_night">@color/grey_600</color>
 
     <color name="colorError">#E53935</color>
+
+    <color name="transparent">#00000000</color>
 </resources>

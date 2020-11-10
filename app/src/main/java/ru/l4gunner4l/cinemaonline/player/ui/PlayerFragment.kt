@@ -28,19 +28,17 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
     private val viewModel: PlayerViewModel by viewModel {
         parametersOf(requireArguments().getParcelable(KEY_MOVIE))
     }
+    private var isFirstLaunch = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.viewState.observe(viewLifecycleOwner, Observer(::render))
-        viewModel.processDataEvent(DataEvent.Load)
+        isFirstLaunch = savedInstanceState == null
+        if (isFirstLaunch)
+            viewModel.processDataEvent(DataEvent.Load)
         errorItem.errorReload.setOnClickListener {
             viewModel.processDataEvent(DataEvent.Load)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.processDataEvent(DataEvent.Play)
     }
 
     override fun onStop() {
@@ -50,19 +48,28 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
 
     private fun render(viewState: ViewState) {
         when (viewState.status) {
-            STATUS.LOAD -> {
+            Status.Load -> {
                 progress.isVisible = true
             }
-            STATUS.CONTENT -> {
+            Status.Content -> {
                 progress.isVisible = false
                 errorItem.isVisible = false
                 playerView.player = viewState.player
+                if (isFirstLaunch)
+                    viewModel.processDataEvent(DataEvent.Play)
             }
-            STATUS.ERROR -> {
+            is Status.Error -> {
                 errorItem.isVisible = true
-                errorItem.errorText.text = "Error"
+                when (viewState.status.error) {
+                    is PlayerExceptions.SourceException -> {
+                        errorItem.errorText.text = viewState.status.error.textError
+                    }
+                    else -> {
+                        errorItem.errorText.text = "Pipetz"
+                    }
+                }
+
             }
         }
     }
-
 }

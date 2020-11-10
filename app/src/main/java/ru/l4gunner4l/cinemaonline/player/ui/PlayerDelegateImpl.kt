@@ -6,12 +6,11 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import org.koin.core.KoinComponent
 
 class PlayerDelegateImpl(
     private val player: ExoPlayer,
     private val dataSourceFactory: DefaultDataSourceFactory
-) : PlayerDelegate, KoinComponent {
+) : PlayerDelegate {
 
     private val listeners: MutableSet<Player.EventListener> = mutableSetOf()
 
@@ -42,6 +41,10 @@ class PlayerDelegateImpl(
 
     override fun seekTo(position: Long) {
         player.seekTo(position)
+    }
+
+    override fun getPosition(): Long {
+        return player.currentPosition
     }
 
     override fun getState(): Int = player.playbackState

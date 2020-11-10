@@ -3,47 +3,68 @@ package ru.l4gunner4l.cinemaonline.player.ui
 import android.util.Log
 import com.google.android.exoplayer2.ExoPlaybackException
 import com.google.android.exoplayer2.Player
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import ru.l4gunner4l.cinemaonline.base.BaseViewModel
 import ru.l4gunner4l.cinemaonline.base.Event
 import ru.l4gunner4l.cinemaonline.data.remote.model.MovieModel
 
 class PlayerViewModel(
-    private val movie: MovieModel
-) : BaseViewModel<ViewState>(), KoinComponent {
+    private val movie: MovieModel,
+    private val playerDelegate: PlayerDelegate
+) : BaseViewModel<ViewState>() {
 
-    private val player: PlayerDelegate by inject<PlayerDelegate>()
+    private var playerPosition: Long = 0
+
+    init {
+        playerDelegate.setStateListener(object : Player.EventListener {
+            override fun onPlayerError(error: ExoPlaybackException) {
+                when (error.type) {
+                    ExoPlaybackException.TYPE_SOURCE -> {
+                        processDataEvent(DataEvent.Error(PlayerExceptions.SourceException("Oh it's wrong TYPE_SOURCE")))
+                    }
+                    ExoPlaybackException.TYPE_RENDERER -> Log.e(
+                        "M_MAIN",
+                        "TYPE_RENDERER: " + error.rendererException.localizedMessage
+                    )
+                    ExoPlaybackException.TYPE_UNEXPECTED -> Log.e(
+                        "M_MAIN",
+                        "TYPE_UNEXPECTED: " + error.unexpectedException.localizedMessage
+                    )
+                }
+            }
+        })
+    }
 
     override fun initialViewState(): ViewState {
-        return ViewState(STATUS.LOAD, movie, player.getPlayerImpl())
+        return ViewState(Status.Load, movie, playerDelegate.getPlayerImpl())
     }
 
     override fun reduce(event: Event, previousState: ViewState): ViewState? {
         when (event) {
             is DataEvent.Load -> {
-                player.preparePlayer(movie.video)
-                player.setStateListener(object : Player.EventListener {
-                    override fun onLoadingChanged(isLoading: Boolean) {}
-                    override fun onPlayerError(error: ExoPlaybackException) {
-                        processDataEvent(DataEvent.Error(error))
-                    }
-                })
-                return previousState.copy(status = STATUS.CONTENT, player = player.getPlayerImpl())
+                playerDelegate.preparePlayer(movie.video)
+                return previousState.copy(
+                    status = Status.Content,
+                    player = playerDelegate.getPlayerImpl()
+                )
             }
             is DataEvent.Error -> {
-                Log.i("M_MAIN", "Error = ${event.error.localizedMessage}")
-                return previousState.copy(status = STATUS.ERROR)
+                Log.i("M_MAIN", "Error = ${event.error}")
+                return previousState.copy(
+                    status = Status.Error(event.error)
+                )
             }
             DataEvent.Play -> {
-                if (player.getState() == Player.STATE_ENDED) {
-                    player.seekTo(0)
+                if (playerDelegate.getState() == Player.STATE_ENDED) {
+                    playerDelegate.seekTo(0)
+                    playerPosition = playerDelegate.getPosition()
                 }
-                player.play()
+                playerDelegate.seekTo(playerPosition)
+                playerDelegate.play()
                 return previousState
             }
             DataEvent.Pause -> {
-                player.pause()
+                playerDelegate.pause()
+                playerPosition = playerDelegate.getPosition()
                 return previousState
             }
         }

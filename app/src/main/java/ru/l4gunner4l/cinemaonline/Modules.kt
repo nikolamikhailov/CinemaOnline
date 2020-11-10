@@ -130,6 +130,6 @@ val playerModule = module {
     }
 
     viewModel<PlayerViewModel> { (movie: MovieModel) ->
-        PlayerViewModel(movie)
+        PlayerViewModel(movie, get())
     }
 }

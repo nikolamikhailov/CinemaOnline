@@ -18,12 +18,6 @@ import ru.l4gunner4l.cinemaonline.data.remote.model.MovieModel
 @Config(sdk = [Build.VERSION_CODES.P])
 class CinemaSpec {
 
-    /*@Before
-    fun setup() {
-        launchFragmentInContainer<MoviesListFragment>(themeResId = R.style.AppTheme)
-        //launchFragmentInContainer<SingleMovieFragment>(themeResId = R.style.AppTheme)
-    }*/
-
     @Rule
     var activityScenarioRule = ActivityScenarioRule(
         MainActivity::class.java

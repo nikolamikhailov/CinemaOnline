@@ -2,6 +2,8 @@
     <string name="app_name">CinemaOnline</string>
     <string name="label_reload">Reload</string>
     <string name="search_view_hint">Input name of movie</string>
+    <string name="error_no_internet">No Internet connection</string>
+    <string name="label_movies_not_found">No movies found</string>
     <!--
         &lt;!&ndash; Actions (menu items, buttons, etc.) and common strings &ndash;&gt;
         <string name="action_settings">Settings</string>
