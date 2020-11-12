@@ -65,7 +65,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
                         errorItem.errorText.text = viewState.status.error.textError
                     }
                     else -> {
-                        errorItem.errorText.text = "Pipetz"
+                        errorItem.errorText.text = getString(R.string.error_unknown)
                     }
                 }
 

@@ -22,7 +22,6 @@
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMoviesList"
             android:layout_width="match_parent"
@@ -44,7 +43,7 @@
         android:visibility="gone"
         app:iconifiedByDefault="false"
         app:layout_constraintTop_toTopOf="parent"
-        app:queryHint="@string/search_view_hint" />
+        app:queryHint="@string/hint_search_view" />
 
     <include
         layout="@layout/item_error"

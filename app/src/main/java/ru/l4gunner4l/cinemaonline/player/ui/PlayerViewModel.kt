@@ -19,16 +19,14 @@ class PlayerViewModel(
             override fun onPlayerError(error: ExoPlaybackException) {
                 when (error.type) {
                     ExoPlaybackException.TYPE_SOURCE -> {
-                        processDataEvent(DataEvent.Error(PlayerExceptions.SourceException("Oh it's wrong TYPE_SOURCE")))
+                        processDataEvent(DataEvent.Error(PlayerExceptions.SourceException("Oh it's wrong: ${error.localizedMessage}")))
                     }
-                    ExoPlaybackException.TYPE_RENDERER -> Log.e(
-                        "M_MAIN",
-                        "TYPE_RENDERER: " + error.rendererException.localizedMessage
-                    )
-                    ExoPlaybackException.TYPE_UNEXPECTED -> Log.e(
-                        "M_MAIN",
-                        "TYPE_UNEXPECTED: " + error.unexpectedException.localizedMessage
-                    )
+                    ExoPlaybackException.TYPE_RENDERER -> {
+                        processDataEvent(DataEvent.Error(PlayerExceptions.RenderException("Oh it's wrong: ${error.localizedMessage}")))
+                    }
+                    ExoPlaybackException.TYPE_UNEXPECTED -> {
+                        processDataEvent(DataEvent.Error(PlayerExceptions.UnexpectedException("Oh it's wrong: ${error.localizedMessage}")))
+                    }
                 }
             }
         })
