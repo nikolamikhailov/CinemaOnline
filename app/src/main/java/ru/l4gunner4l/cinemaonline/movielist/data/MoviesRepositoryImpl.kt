@@ -10,7 +10,9 @@ class MoviesRepositoryImpl(private val remote: MoviesRemoteSource) : MoviesRepos
     }
 
     override suspend fun getMovies(name: String): List<MovieModel> {
-        return remote.getMoviesResponse().movies.filter { it.title.toLowerCase() == name }
+        return remote.getMoviesResponse().movies.filter {
+            it.title.toLowerCase().contains(name.toLowerCase().trim())
+        }
     }
 
     override suspend fun getMovie(id: Long): MovieModel {

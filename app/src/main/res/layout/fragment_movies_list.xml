@@ -45,6 +45,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:queryHint="@string/hint_search_view" />
 
+    <View
+        android:id="@+id/splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash"
+        android:visibility="gone" />
+
     <include
         layout="@layout/item_error"
         tools:visibility="gone" />

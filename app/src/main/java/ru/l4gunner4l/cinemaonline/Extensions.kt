@@ -1,5 +1,6 @@
 package ru.l4gunner4l.cinemaonline
 
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AbsDelegationAdapter
@@ -21,3 +22,5 @@ fun RecyclerView.setAdapterAndCleanupOnDetachFromWindow(mAdapter: RecyclerView.A
         }
     })
 }
+
+fun dot(text: String = "DOT") = Log.i("M_MAIN", text)

@@ -5,8 +5,6 @@ import kotlinx.coroutines.launch
 import ru.l4gunner4l.cinemaonline.SingleMovieScreen
 import ru.l4gunner4l.cinemaonline.base.BaseViewModel
 import ru.l4gunner4l.cinemaonline.base.Event
-import ru.l4gunner4l.cinemaonline.base.NoConnectionException
-import ru.l4gunner4l.cinemaonline.data.remote.model.MovieModel
 import ru.l4gunner4l.cinemaonline.movielist.data.MoviesInteractor
 import ru.terrakok.cicerone.Router
 
@@ -15,6 +13,10 @@ class MoviesListViewModel(
     private val router: Router
 ) : BaseViewModel<ViewState>() {
 
+    init {
+        processDataEvent(DataEvent.RequestMovies)
+    }
+
     override fun initialViewState(): ViewState = ViewState(STATUS.LOAD, emptyList())
 
     override fun reduce(event: Event, previousState: ViewState): ViewState? {
@@ -22,38 +24,29 @@ class MoviesListViewModel(
 
             is UiEvent.OnItemClick -> {
                 viewModelScope.launch {
-                    router.navigateTo(SingleMovieScreen(interactor.getMovies()[event.index]))
+                    router.navigateTo(SingleMovieScreen(previousState.moviesList[event.index]))
                 }
             }
 
             is DataEvent.RequestMovies -> {
                 viewModelScope.launch {
-                    try {
-                        val movies: List<MovieModel> = interactor.getMovies()
-                        processDataEvent(DataEvent.SuccessMoviesRequest(movies))
-                    } catch (e: NoConnectionException) {
-                        processDataEvent(DataEvent.FailureMoviesRequest)
-                    }
+                    interactor.getMovies().fold(
+                        { processDataEvent(DataEvent.FailureMoviesRequest) },
+                        { processDataEvent(DataEvent.SuccessMoviesRequest(it)) }
+                    )
                 }
-                if (previousState.status == STATUS.CONTENT) {
-                    return previousState.copy(status = STATUS.LOAD, moviesList = emptyList())
-                }
+                return previousState.copy(status = STATUS.LOAD)
             }
 
             is DataEvent.SearchMovies -> {
                 viewModelScope.launch {
-                    try {
-                        val input = event.movieName.trim().toLowerCase()
-                        val movies = if (input.isBlank()) interactor.getMovies()
-                        else interactor.getMovies(input)
-                        processDataEvent(DataEvent.SuccessMoviesRequest(movies))
-                    } catch (e: NoConnectionException) {
-                        processDataEvent(DataEvent.FailureMoviesRequest)
-                    }
+                    val input = event.movieName
+                    interactor.getMovies(input).fold(
+                        { processDataEvent(DataEvent.FailureMoviesRequest) },
+                        { processDataEvent(DataEvent.SuccessMoviesRequest(it)) }
+                    )
                 }
-                if (previousState.status == STATUS.CONTENT) {
-                    return previousState.copy(status = STATUS.LOAD, moviesList = emptyList())
-                }
+                return previousState.copy(status = STATUS.LOAD)
             }
 
             is DataEvent.SuccessMoviesRequest -> {

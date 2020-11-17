@@ -2,6 +2,7 @@ package ru.l4gunner4l.cinemaonline.singlemovie.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,6 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import ru.l4gunner4l.cinemaonline.R
 import ru.l4gunner4l.cinemaonline.data.remote.model.MovieModel
+
 
 class SingleMovieFragment : Fragment(R.layout.fragment_single_movie) {
 
@@ -36,6 +38,14 @@ class SingleMovieFragment : Fragment(R.layout.fragment_single_movie) {
 
     private fun initUi() {
         val movie = requireArguments().getParcelable<MovieModel>(KEY_MOVIE)!!
+        toolbar.navigationIcon = ResourcesCompat.getDrawable(
+            resources,
+            R.drawable.ic_back_24,
+            requireContext().theme
+        )
+        toolbar.setNavigationOnClickListener {
+            viewModel.processUiEvent(UiEvent.OnBackClick)
+        }
         openPlayerBtn.setOnClickListener {
             viewModel.processUiEvent(UiEvent.OnWatchClick)
         }
