@@ -50,11 +50,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
         when (viewState.status) {
             Status.Load -> {
                 progress.isVisible = true
+                playerView.player = viewState.player
             }
             Status.Content -> {
                 progress.isVisible = false
                 errorItem.isVisible = false
-                playerView.player = viewState.player
                 if (isFirstLaunch)
                     viewModel.processDataEvent(DataEvent.Play)
             }

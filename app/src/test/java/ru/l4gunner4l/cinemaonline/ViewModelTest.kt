@@ -14,7 +14,7 @@ import ru.l4gunner4l.cinemaonline.movielist.ui.DataEvent
 import ru.l4gunner4l.cinemaonline.movielist.ui.MoviesListViewModel
 import ru.l4gunner4l.cinemaonline.movielist.ui.STATUS
 import ru.l4gunner4l.cinemaonline.movielist.ui.ViewState
-import ru.terrakok.cicerone.Cicerone
+import ru.terrakok.cicerone.Router
 
 class ViewModelTest {
 
@@ -25,13 +25,14 @@ class ViewModelTest {
     @Rule
     @JvmField
     val coroutineRule = CoroutineRule()
-    private val viewStateObserver: Observer<ViewState> = mock()
-
     private lateinit var viewModel: MoviesListViewModel
+
+    private val viewStateObserver: Observer<ViewState> = mock()
     private val interactor: MoviesInteractor = mock()
+    private val router: Router = mock()
 
     @Test
-    fun `test movies success`() {
+    fun `test load status success`() {
         val m = MovieModel(
             isAdult = false,
             genres = listOf(GenreRemoteModel(name = "Drama")),
@@ -49,12 +50,36 @@ class ViewModelTest {
         )
         mockMovie(m)
         createViewModel()
-        viewModel.processUiEvent(DataEvent.RequestMovies)
         val vs = captureViewState()
-        if (vs.status != STATUS.LOAD)
-            assertTrue(
-                vs.moviesList.first() == m
-            )
+        assertTrue(
+            vs.status == STATUS.LOAD
+        )
+    }
+
+    @Test
+    fun `test request movies success`() {
+        val m = MovieModel(
+            isAdult = false,
+            genres = listOf(GenreRemoteModel(name = "Drama")),
+            id = 244786,
+            originalLanguage = "en",
+            originalTitle = "Whiplash",
+            overview = "Under the direction of a ruthless instructor, a talented young drummer begins to pursue perfection at any cost, even his humanity.",
+            releaseDate = "2014-10-10",
+            posterPath = "https://upload.wikimedia.org/wikipedia/en/0/01/Whiplash_poster.jpg",
+            popularity = 8.441533,
+            title = "Whiplash",
+            video = "http://techslides.com/demos/sample-videos/small.mp4, voteAverage=8.5, voteCount=856",
+            voteAverage = 8.5,
+            voteCount = 856
+        )
+        mockMovie(m)
+        createViewModel()
+        viewModel.processDataEvent(DataEvent.SuccessMoviesRequest(listOf(m)))
+        val vs = captureViewState()
+        assertTrue(
+            vs.moviesList.first() == m
+        )
     }
 
     @Test
@@ -66,7 +91,7 @@ class ViewModelTest {
 
 
     private fun createViewModel() {
-        viewModel = MoviesListViewModel(interactor, Cicerone.create().router)
+        viewModel = MoviesListViewModel(interactor, router)
         viewModel.viewState.observeForever(viewStateObserver)
     }
 
