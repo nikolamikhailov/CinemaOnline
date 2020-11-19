@@ -6,17 +6,29 @@
     android:layout_height="match_parent"
     android:background="?attr/colorBackground">
 
+    <TextView
+        android:id="@+id/noMoviesTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_movies_not_found"
+        android:textAppearance="@style/TextAppearance.Body1"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMoviesList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:itemCount="0"
+            android:clipToPadding="false"
+            android:paddingTop="64dp"
+            tools:itemCount="10"
             tools:listitem="@layout/item_movie" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -26,8 +38,19 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="@drawable/bg_search_view"
+        android:queryBackground="@android:color/transparent"
         android:textColorHint="?attr/textColorPrimary"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:visibility="gone"
+        app:iconifiedByDefault="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="@string/hint_search_view" />
+
+    <View
+        android:id="@+id/splashScreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash"
+        android:visibility="gone" />
 
     <include
         layout="@layout/item_error"

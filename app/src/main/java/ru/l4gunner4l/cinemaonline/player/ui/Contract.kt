@@ -6,14 +6,14 @@ import ru.l4gunner4l.cinemaonline.data.remote.model.MovieModel
 
 
 data class ViewState(
-    val status: STATUS,
+    val status: Status,
     val movie: MovieModel,
     val player: ExoPlayer
 )
 
 sealed class DataEvent : Event {
     object Load : DataEvent()
-    data class Error(val textError: String) : DataEvent()
+    data class Error(val error: PlayerExceptions) : DataEvent()
     object Play : DataEvent()
     object Pause : DataEvent()
 }
@@ -21,10 +21,8 @@ sealed class UiEvent : Event {
     object OnExitClick : UiEvent()
 }
 
-enum class STATUS {
-    PLAY,
-    PAUSE,
-    LOAD,
-    CONTENT,
-    ERROR
+sealed class Status {
+    object Load : Status()
+    object Content : Status()
+    data class Error(val error: PlayerExceptions) : Status()
 }
