@@ -76,7 +76,6 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
     }
 
     private fun requestOrSearch(name: String?) {
-        setLoadUIMode()
         if (name != null && name.isNotBlank())
             viewModel.processDataEvent(DataEvent.SearchMovies(searchView.query.toString()))
         else viewModel.processUiEvent(DataEvent.RequestMovies)
@@ -98,15 +97,15 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
     }
 
     private fun setLoadUIMode() {
-        splash.isVisible = true
-        progress.isVisible = true
+        splashScreen?.isVisible = true
+        progress?.isVisible = true
     }
 
     private fun setContentUIMode(movies: List<MovieModel>) {
         rvMoviesList.isVisible = movies.isNotEmpty()
         noMoviesTV.isVisible = movies.isEmpty()
         errorItem.isVisible = false
-        splash.isVisible = false
+        splashScreen.isVisible = false
         progress.isVisible = false
         searchView.isVisible = true
         swipeRefreshLayout.isRefreshing = false
@@ -116,7 +115,7 @@ class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
         searchView.isVisible = false
         errorItem.errorText.text = getString(R.string.error_no_internet)
         errorItem.isVisible = true
-        splash.isVisible = true
+        splashScreen.isVisible = true
         progress.isVisible = false
         rvMoviesList.isVisible = false
         swipeRefreshLayout.isRefreshing = false

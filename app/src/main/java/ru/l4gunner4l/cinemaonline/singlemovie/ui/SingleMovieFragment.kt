@@ -15,7 +15,6 @@ import org.koin.core.parameter.parametersOf
 import ru.l4gunner4l.cinemaonline.R
 import ru.l4gunner4l.cinemaonline.data.remote.model.MovieModel
 
-
 class SingleMovieFragment : Fragment(R.layout.fragment_single_movie) {
 
     companion object {
@@ -32,8 +31,8 @@ class SingleMovieFragment : Fragment(R.layout.fragment_single_movie) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.viewState.observe(viewLifecycleOwner, Observer(::render))
         initUi()
+        viewModel.viewState.observe(viewLifecycleOwner, Observer(::render))
     }
 
     private fun initUi() {

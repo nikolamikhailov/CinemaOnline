@@ -2,12 +2,15 @@ package ru.l4gunner4l.cinemaonline
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
+import ru.terrakok.cicerone.commands.Command
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,9 +44,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createNavigator(): Navigator =
-        SupportAppNavigator(
+        object : SupportAppNavigator(
             this,
             supportFragmentManager,
             R.id.fragmentHolder
-        )
+        ) {
+            override fun setupFragmentTransaction(
+                command: Command,
+                currentFragment: Fragment?,
+                nextFragment: Fragment?,
+                fragmentTransaction: FragmentTransaction
+            ) {
+                fragmentTransaction.setCustomAnimations(
+                    R.anim.enter_right_to_left,
+                    R.anim.exit_right_to_left,
+                    R.anim.enter_left_to_right,
+                    R.anim.exit_left_to_right
+                )
+            }
+        }
 }
