@@ -1,7 +1,10 @@
 package ru.l4gunner4l.cinemaonline.player.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -28,17 +31,28 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
     private val viewModel: PlayerViewModel by viewModel {
         parametersOf(requireArguments().getParcelable(KEY_MOVIE))
     }
+
+    @ColorRes
+    private var previousStatusBarColor: Int = 0
     private var isFirstLaunch = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
         viewModel.viewState.observe(viewLifecycleOwner, Observer(::render))
         isFirstLaunch = savedInstanceState == null
-        if (isFirstLaunch)
-            viewModel.processDataEvent(DataEvent.Load)
         errorItem.errorReload.setOnClickListener {
             viewModel.processDataEvent(DataEvent.Load)
         }
+    }
+
+    private fun initView() {
+        progress.isVisible = true
+        previousStatusBarColor = requireActivity().window.statusBarColor
+        requireActivity().window.statusBarColor = ContextCompat.getColor(
+            requireContext(),
+            R.color.background_dark_night
+        )
     }
 
     override fun onStop() {
@@ -53,6 +67,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
                 playerView.player = viewState.player
             }
             Status.Content -> {
+                playerView.player = viewState.player
                 progress.isVisible = false
                 errorItem.isVisible = false
                 if (isFirstLaunch)
@@ -68,8 +83,13 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
                         errorItem.errorText.text = getString(R.string.error_unknown)
                     }
                 }
-
             }
         }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActivity().window.statusBarColor = previousStatusBarColor
     }
 }

@@ -17,9 +17,6 @@ sealed class DataEvent : Event {
     object Play : DataEvent()
     object Pause : DataEvent()
 }
-sealed class UiEvent : Event {
-    object OnExitClick : UiEvent()
-}
 
 sealed class Status {
     object Load : Status()

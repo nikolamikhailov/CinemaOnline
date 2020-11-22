@@ -1,6 +1,5 @@
 package ru.l4gunner4l.cinemaonline.player.ui
 
-import android.util.Log
 import com.google.android.exoplayer2.ExoPlaybackException
 import com.google.android.exoplayer2.Player
 import ru.l4gunner4l.cinemaonline.base.BaseViewModel
@@ -15,6 +14,7 @@ class PlayerViewModel(
     private var playerPosition: Long = 0
 
     init {
+        processDataEvent(DataEvent.Load)
         playerDelegate.setStateListener(object : Player.EventListener {
             override fun onPlayerError(error: ExoPlaybackException) {
                 when (error.type) {
@@ -25,6 +25,15 @@ class PlayerViewModel(
                         processDataEvent(DataEvent.Error(PlayerExceptions.RenderException("Oh it's wrong: ${error.localizedMessage}")))
                     }
                     ExoPlaybackException.TYPE_UNEXPECTED -> {
+                        processDataEvent(DataEvent.Error(PlayerExceptions.UnexpectedException("Oh it's wrong: ${error.localizedMessage}")))
+                    }
+                    ExoPlaybackException.TYPE_OUT_OF_MEMORY -> {
+                        processDataEvent(DataEvent.Error(PlayerExceptions.UnexpectedException("Oh it's wrong: ${error.localizedMessage}")))
+                    }
+                    ExoPlaybackException.TYPE_REMOTE -> {
+                        processDataEvent(DataEvent.Error(PlayerExceptions.UnexpectedException("Oh it's wrong: ${error.localizedMessage}")))
+                    }
+                    ExoPlaybackException.TYPE_TIMEOUT -> {
                         processDataEvent(DataEvent.Error(PlayerExceptions.UnexpectedException("Oh it's wrong: ${error.localizedMessage}")))
                     }
                 }
@@ -46,7 +55,6 @@ class PlayerViewModel(
                 )
             }
             is DataEvent.Error -> {
-                Log.i("M_MAIN", "Error = ${event.error}")
                 return previousState.copy(
                     status = Status.Error(event.error)
                 )

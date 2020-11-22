@@ -15,7 +15,6 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:statusBarColor">?attr/colorBackground</item>
 
-
         <item name="colorBackground">@color/background_light_night</item>
         <item name="colorBackgroundDark">@color/background_dark_night</item>
 
