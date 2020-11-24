@@ -20,7 +20,7 @@ import ru.l4gunner4l.cinemaonline.singlemovie.ui.SingleMovieFragment
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.P])
 @LooperMode(LooperMode.Mode.PAUSED)
-class CinemaTest {
+class MovieClickUiTest {
 
     @Test
     fun testEventFragment() {

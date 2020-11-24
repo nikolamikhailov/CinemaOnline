@@ -42,3 +42,9 @@ inline fun <TYPE, LEFT, RIGHT> Either<LEFT, RIGHT>.flatMap(
         is Either.Right -> transform(value)
     }
 }
+
+fun <LEFT, RIGHT> RIGHT.toRightEither(): Either<LEFT, RIGHT> =
+    Either.Right(this)
+
+fun <LEFT, RIGHT> LEFT.toLeftEither(): Either<LEFT, RIGHT> =
+    Either.Left(this)

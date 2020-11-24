@@ -16,7 +16,7 @@ import ru.l4gunner4l.cinemaonline.movielist.ui.STATUS
 import ru.l4gunner4l.cinemaonline.movielist.ui.ViewState
 import ru.terrakok.cicerone.Router
 
-class ViewModelTest {
+class MoviesListViewModelTest {
 
     @Rule
     @JvmField
@@ -118,9 +118,3 @@ inline fun <reified T : Any> capture(invokeCaptor: (KArgumentCaptor<T>) -> Unit)
     invokeCaptor(captor)
     return captor.lastValue
 }
-
-fun <LEFT, RIGHT> RIGHT.toRightEither(): Either<LEFT, RIGHT> =
-    Either.Right(this)
-
-fun <LEFT, RIGHT> LEFT.toLeftEither(): Either<LEFT, RIGHT> =
-    Either.Left(this)
