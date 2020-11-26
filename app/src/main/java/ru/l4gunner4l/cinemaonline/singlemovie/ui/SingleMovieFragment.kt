@@ -63,15 +63,7 @@ class SingleMovieFragment : Fragment(R.layout.fragment_single_movie) {
     }
 
     private fun render(viewState: ViewState) {
-        when (viewState.status) {
-            STATUS.CONTENT -> {
-                setMovieToUi(viewState.movie)
-            }
-            STATUS.LOAD -> {
-            }
-            STATUS.ERROR -> {
-            }
-        }
+        setMovieToUi(viewState.movie)
     }
 
     private fun setMovieToUi(movie: MovieModel) = with(movie) {

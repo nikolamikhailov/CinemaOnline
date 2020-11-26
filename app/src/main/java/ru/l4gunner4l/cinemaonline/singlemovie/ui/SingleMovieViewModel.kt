@@ -12,7 +12,7 @@ class SingleMovieViewModel(
 ) : BaseViewModel<ViewState>() {
 
     override fun initialViewState(): ViewState {
-        return ViewState(STATUS.CONTENT, movie)
+        return ViewState(movie)
     }
 
     override fun reduce(event: Event, previousState: ViewState): ViewState? {

@@ -24,5 +24,7 @@ interface PlayerDelegate : KoinComponent {
 
     fun setStateListener(listener: Player.EventListener)
 
-    fun removeListeners()
+    fun removeAllListeners()
+
+    fun removeListener(listener: Player.EventListener)
 }

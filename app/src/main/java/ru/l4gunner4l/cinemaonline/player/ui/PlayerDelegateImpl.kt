@@ -54,7 +54,13 @@ class PlayerDelegateImpl(
         listeners.add(listener)
     }
 
-    override fun removeListeners() {
+    override fun removeListener(listener: Player.EventListener) {
+        listeners.forEach {
+            if (listener == it) player.removeListener(it)
+        }
+    }
+
+    override fun removeAllListeners() {
         listeners.forEach {
             player.removeListener(it)
         }

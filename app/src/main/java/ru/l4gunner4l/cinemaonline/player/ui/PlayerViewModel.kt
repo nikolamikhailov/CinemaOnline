@@ -12,10 +12,10 @@ class PlayerViewModel(
 ) : BaseViewModel<ViewState>() {
 
     private var playerPosition: Long = 0
+    private val stateListener: Player.EventListener
 
     init {
-        processDataEvent(DataEvent.Load)
-        playerDelegate.setStateListener(object : Player.EventListener {
+        stateListener = object : Player.EventListener {
             override fun onPlayerError(error: ExoPlaybackException) {
                 when (error.type) {
                     ExoPlaybackException.TYPE_SOURCE -> {
@@ -38,7 +38,9 @@ class PlayerViewModel(
                     }
                 }
             }
-        })
+        }
+        processDataEvent(DataEvent.Load)
+        playerDelegate.setStateListener(stateListener)
     }
 
     override fun initialViewState(): ViewState {
@@ -75,5 +77,10 @@ class PlayerViewModel(
             }
         }
         return null
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        playerDelegate.removeListener(stateListener)
     }
 }

@@ -31,8 +31,8 @@ class MoviesListViewModel(
             is DataEvent.RequestMovies -> {
                 viewModelScope.launch {
                     interactor.getMovies().fold(
-                        { processDataEvent(DataEvent.FailureMoviesRequest) },
-                        { processDataEvent(DataEvent.SuccessMoviesRequest(it)) }
+                        onError = { processDataEvent(DataEvent.FailureMoviesRequest) },
+                        onSuccess = { processDataEvent(DataEvent.SuccessMoviesRequest(it)) }
                     )
                 }
                 return previousState.copy(status = STATUS.LOAD)
@@ -42,8 +42,8 @@ class MoviesListViewModel(
                 viewModelScope.launch {
                     val input = event.movieName
                     interactor.getMovies(input).fold(
-                        { processDataEvent(DataEvent.FailureMoviesRequest) },
-                        { processDataEvent(DataEvent.SuccessMoviesRequest(it)) }
+                        onError = { processDataEvent(DataEvent.FailureMoviesRequest) },
+                        onSuccess = { processDataEvent(DataEvent.SuccessMoviesRequest(it)) }
                     )
                 }
                 return previousState.copy(status = STATUS.LOAD)
