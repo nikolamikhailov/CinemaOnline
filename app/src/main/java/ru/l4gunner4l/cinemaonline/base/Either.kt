@@ -1,4 +1,4 @@
-package ru.l4gunner4l.cinemaonline
+package ru.l4gunner4l.cinemaonline.base
 
 inline fun <reified T> attempt(func: () -> T): Either<Throwable, T> = try {
     Either.Right(func.invoke())

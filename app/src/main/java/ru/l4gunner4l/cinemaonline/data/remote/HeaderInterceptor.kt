@@ -1,11 +1,10 @@
-package ru.l4gunner4l.cinemaonline.base
+package ru.l4gunner4l.cinemaonline.data.remote
 
 import android.content.Context
 import android.net.ConnectivityManager
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
-
 
 class HeaderInterceptor(val context: Context) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {

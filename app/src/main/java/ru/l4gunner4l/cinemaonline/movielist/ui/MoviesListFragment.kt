@@ -18,9 +18,9 @@ import kotlinx.android.synthetic.main.item_error.view.*
 import kotlinx.android.synthetic.main.item_progress_bar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.l4gunner4l.cinemaonline.R
+import ru.l4gunner4l.cinemaonline.base.setAdapterAndCleanupOnDetachFromWindow
+import ru.l4gunner4l.cinemaonline.base.setData
 import ru.l4gunner4l.cinemaonline.data.remote.model.MovieModel
-import ru.l4gunner4l.cinemaonline.setAdapterAndCleanupOnDetachFromWindow
-import ru.l4gunner4l.cinemaonline.setData
 
 class MoviesListFragment : Fragment(R.layout.fragment_movies_list) {
 

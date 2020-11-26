@@ -1,4 +1,4 @@
-package ru.l4gunner4l.cinemaonline
+package ru.l4gunner4l.cinemaonline.base
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

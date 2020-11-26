@@ -13,7 +13,7 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.l4gunner4l.cinemaonline.base.HeaderInterceptor
+import ru.l4gunner4l.cinemaonline.data.remote.HeaderInterceptor
 import ru.l4gunner4l.cinemaonline.data.remote.MoviesApi
 import ru.l4gunner4l.cinemaonline.data.remote.model.MovieModel
 import ru.l4gunner4l.cinemaonline.data.remote.model.MoviesRemoteSource

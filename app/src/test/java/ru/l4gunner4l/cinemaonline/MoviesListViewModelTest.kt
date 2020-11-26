@@ -7,6 +7,8 @@ import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
+import ru.l4gunner4l.cinemaonline.base.toLeftEither
+import ru.l4gunner4l.cinemaonline.base.toRightEither
 import ru.l4gunner4l.cinemaonline.data.remote.model.GenreRemoteModel
 import ru.l4gunner4l.cinemaonline.data.remote.model.MovieModel
 import ru.l4gunner4l.cinemaonline.movielist.data.MoviesInteractor
